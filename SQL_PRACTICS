@@ -1,3 +1,20 @@
+C:\>cd "Program files"
+C:\Program Files>cd MySQL
+C:\Program Files\MySQL>cd "MySQL Server 8.0"
+C:\Program Files\MySQL\MySQL Server 8.0>cd bin
+C:\Program Files\MySQL\MySQL Server 8.0\bin>mysql -u root -p
+Enter password: ****
+
+SHOW DATABASES;
+CREATE DATABASE sql_course;
+SHOW DATABASES;
+DROP DATABASE sql_course;
+SHOW DATABASES;
+CREATE DATABASE sql_course;
+SHOW DATABASES;
+USE sql_course;
+show tables;
+
 CREATE TABLE lesson(
     -> id INT AUTO_INCREMENT PRIMARY KEY,
     -> name VARCHAR(255) NOT NULL,
