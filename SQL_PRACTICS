@@ -15,6 +15,14 @@ SHOW DATABASES;
 USE sql_course;
 show tables;
 
+ CREATE TABLE teacher(
+    -> id INT AUTO_INCREMENT PRIMARY KEY,
+    -> surname VARCHAR(255) NOT NULL
+    -> );
+	
+show tables;
+show columns FROM teacher;
+
 CREATE TABLE lesson(
     -> id INT AUTO_INCREMENT PRIMARY KEY,
     -> name VARCHAR(255) NOT NULL,
