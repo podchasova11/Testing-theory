@@ -1,0 +1,123 @@
+CREATE TABLE lesson(
+    -> id INT AUTO_INCREMENT PRIMARY KEY,
+    -> name VARCHAR(255) NOT NULL,
+    -> teacher_id INT NOT NULL,
+    -> FOREIGN KEY (teacher_id) references teacher(id)
+    -> );
+	
+show tables;
+show columns from lesson;
+
+INSERT INTO teacher (surname) values ("Иванов");
+INSERT INTO teacher (surname) values ("Иванов");
+INSERT INTO teacher (surname) values ("Петров");
+INSERT INTO teacher (surname) values ("Сидоров");
+INSERT INTO teacher (surname) values ("Чижов");	
+INSERT INTO teacher (surname) values ("Петров");
+INSERT INTO teacher (surname) values ("Петров");
+
+SELECT * FROM teacher;
+
+SELECT id FROM teacher;
+SELECT id, surname, surname FROM teacher;
+SELECT DISTINCT surname FROM teacher;
+SELECT * FROM teacher WHERE id = 1;
+SELECT * FROM teacher WHERE id = 3;
+SELECT * FROM teacher WHERE id > 3;
+
+SELECT * FROM teacher WHERE surname = "Петров";
+SELECT * FROM teacher WHERE surname = "Петров" LIMIT 2;
+SELECT * FROM teacher WHERE surname = "Петров" LIMIT 1;
+SELECT * FROM teacher LIMIT 5;
+
+SELECT id AS 'ИДЕНТИФИКАТОР', surname AS 'Фамилия' FROM teacher;
+
+SELECT * FROM teacher ORDER BY surname;
+SELECT * FROM teacher ORDER BY id
+SELECT * FROM teacher ORDER BY id DESC;
+
+ALTER TABLE teacher ADD age INT;
+show columns from teacher;
+select * from teacher;
+
+UPDATE teacher SET age = 20 where id=1;
+select * from teacher;
+UPDATE teacher SET age = 25;
+
+UPDATE teacher SET age = 30 where id=2;
+UPDATE teacher SET age = 35 where id=3;
+UPDATE teacher SET age = 40 where id=4;
+UPDATE teacher SET age = 45 where id=5;
+UPDATE teacher SET age = 50 where id=6;
+
+select * from teacher;
+SELECT * FROM teacher WHERE surname LIKE "%ов";
+SELECT * FROM teacher WHERE surname LIKE "п%ов";
+SELECT * FROM teacher WHERE id > 3 AND age < 45;
+SELECT * FROM teacher WHERE id > 3 AND age < 46;
+SELECT * FROM teacher WHERE id > 4 AND age > 31;
+SELECT * FROM teacher WHERE NOT id = 2;
+SELECT * FROM teacher WHERE age BETWEEN 35 and 45;
+
+DELETE FROM teacher WHERE id = 6;
+SELECT * FROM teacher;
+
+INSERT INTO lesson (name, teacher_id) VALUES ("Математика", 1), ("Информатика", 1), ("Русский", 2), ("Физика", 3);
+
+select * from lesson;
+
+SELECT teacher.surname, lesson.name FROM teacher INNER JOIN lesson ON teacher.id = lesson.teacher_id;
+SELECT teacher.surname, lesson.name FROM teacher LEFT OUTER JOIN lesson ON teacher.id = lesson.teacher_id;
+SELECT teacher.surname, lesson.name FROM teacher RIGHT OUTER JOIN lesson ON teacher.id = lesson.teacher_id;
+
+ВЕРТИКАЛЬНОЕ ОБЪЕДИНЕНИЕ ТАБЛИЦ
+SELECT * FROM teacher UNION SELECT * FROM lesson;
+SELECT * FROM lesson UNION SELECT * FROM teacher;
+
+ФУНКЦИИ: AVG => СРЕДНЕЕ ЗНАЧЕНИЕ, MAX, MIN, SUM ...
+SELECT AVG(age) FROM teacher;
++----------+
+| AVG(age) |
++----------+
+|  35.0000 |
++----------+
+
+SELECT MAX(age), MIN(age) FROM teacher;
++----------+----------+
+| MAX(age) | MIN(age) |
++----------+----------+
+|       45 |       25 |
++----------+----------+
+
+SELECT SUM(age) FROM teacher;
++----------+
+| SUM(age) |
++----------+
+|      175 |
++----------+
+
+INSERT INTO teacher (surname, age) VALUES ("Николаев", 25), ("Шишкин", 30);
+
+select * from teacher;
++----+----------+------+
+| id | surname  | age  |
++----+----------+------+
+|  1 | Иванов   |   25 |
+|  2 | Петров   |   30 |
+|  3 | Сидоров  |   35 |
+|  4 | Чижов    |   40 |
+|  5 | Петров   |   45 |
+|  7 | Николаев |   25 |
+|  8 | Шишкин   |   30 |
++----+----------+------+
+
+SELECT age, COUNT(age) FROM teacher GROUP BY age;
++------+------------+
+| age  | COUNT(age) |
++------+------------+
+|   25 |          2 |
+|   30 |          2 |
+|   35 |          1 |
+|   40 |          1 |
+|   45 |          1 |
++------+------------+
