@@ -865,3 +865,412 @@ mysql> SELECT * FROM teacher WHERE id > 1;
 |  8 | Шишкин   |   30 |
 +----+----------+------+
 6 rows in set (0.00 sec)
+
+INSERT INTO teacher (surname, age) VALUES ("Николаев", 25), ("Шишкин", 30);
+
+select * from teacher;
++----+----------+------+
+| id | surname  | age  |
++----+----------+------+
+|  1 | Иванов   |   25 |
+|  2 | Петров   |   30 |
+|  3 | Сидоров  |   35 |
+|  4 | Чижов    |   40 |
+|  5 | Петров   |   45 |
+|  7 | Николаев |   25 |
+|  8 | Шишкин   |   30 |
++----+----------+------+
+
+SELECT age, COUNT(age) FROM teacher GROUP BY age;
++------+------------+
+| age  | COUNT(age) |
++------+------------+
+|   25 |          2 |
+|   30 |          2 |
+|   35 |          1 |
+|   40 |          1 |
+|   45 |          1 |
++------+------------+
+
+
+
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| test_1             |
+| world              |
++--------------------+
+7 rows in set (0.00 sec)
+
+mysql> CREATE DATABASE sql_course;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sql_course         |
+| sys                |
+| test_1             |
+| world              |
++--------------------+
+8 rows in set (0.00 sec)
+
+mysql> DROP DATABASE sql_course;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| test_1             |
+| world              |
++--------------------+
+7 rows in set (0.00 sec)
+
+mysql> CREATE DATABASE sql_course;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sql_course         |
+| sys                |
+| test_1             |
+| world              |
++--------------------+
+8 rows in set (0.00 sec)
+
+mysql> USE sql_course;
+Database changed
+
+mysql> show tables;
+Empty set (0.00 sec)
+
+
+mysql> CREATE TABLE teacher(
+    -> id INT AUTO_INCREMENT PRIMARY KEY,
+    -> surname VARCHAR(255) NOT NULL
+    -> );
+	
+	mysql> show tables;
++----------------------+
+| Tables_in_sql_course |
++----------------------+
+| teacher              |
++----------------------+
+1 row in set (0.00 sec)
+
+mysql> show columns FROM teacher;
++---------+--------------+------+-----+---------+----------------+
+| Field   | Type         | Null | Key | Default | Extra          |
++---------+--------------+------+-----+---------+----------------+
+| id      | int          | NO   | PRI | NULL    | auto_increment |
+| surname | varchar(255) | NO   |     | NULL    |                |
++---------+--------------+------+-----+---------+----------------+
+2 rows in set (0.00 sec)
+
+mysql> CREATE TABLE lesson(
+    -> id INT AUTO_INCREMENT PRIMARY KEY,
+    -> name VARCHAR(255) NOT NULL,
+    -> teacher_id INT NOT NULL,
+    -> FOREIGN KEY (teacher_id) references teacher(id)
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> show tables;
++----------------------+
+| Tables_in_sql_course |
++----------------------+
+| lesson               |
+| teacher              |
++----------------------+
+2 rows in set (0.00 sec)
+
+mysql> show columns from lesson;
++------------+--------------+------+-----+---------+----------------+
+| Field      | Type         | Null | Key | Default | Extra          |
++------------+--------------+------+-----+---------+----------------+
+| id         | int          | NO   | PRI | NULL    | auto_increment |
+| name       | varchar(255) | NO   |     | NULL    |                |
+| teacher_id | int          | NO   | MUL | NULL    |                |
++------------+--------------+------+-----+---------+----------------+
+3 rows in set (0.00 sec)
+
+mysql> INSERT INTO teacher (surname) values ("Иванов");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO teacher (surname) values ("Иванов");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO teacher (surname) values ("Петров");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO teacher (surname) values ("Сидоров");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO teacher (surname) values ("Чижов");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO teacher (surname) values ("Петров");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO teacher (surname) values ("Петров");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> SELECT * FROM teacher;
++----+---------+
+| id | surname |
++----+---------+
+|  1 | Иванов  |
+|  2 | Петров  |
+|  3 | Сидоров |
+|  4 | Чижов   |
+|  5 | Петров  |
+|  6 | Петров  |
++----+---------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT id FROM teacher;
++----+
+| id |
++----+
+|  1 |
+|  2 |
+|  3 |
+|  4 |
+|  5 |
+|  6 |
++----+
+6 rows in set (0.00 sec)
+
+mysql> SELECT id, surname, surname FROM teacher;
++----+---------+---------+
+| id | surname | surname |
++----+---------+---------+
+|  1 | Иванов  | Иванов  |
+|  2 | Петров  | Петров  |
+|  3 | Сидоров | Сидоров |
+|  4 | Чижов   | Чижов   |
+|  5 | Петров  | Петров  |
+|  6 | Петров  | Петров  |
++----+---------+---------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT DISTINCT surname FROM teacher;
++---------+
+| surname |
++---------+
+| Иванов  |
+| Петров  |
+| Сидоров |
+| Чижов   |
++---------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT * FROM teacher WHERE id = 1;
++----+---------+
+| id | surname |
++----+---------+
+|  1 | Иванов  |
++----+---------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM teacher WHERE id = 3;
++----+---------+
+| id | surname |
++----+---------+
+|  3 | Сидоров |
++----+---------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM teacher WHERE id > 3;
++----+---------+
+| id | surname |
++----+---------+
+|  4 | Чижов   |
+|  5 | Петров  |
+|  6 | Петров  |
++----+---------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT * FROM teacher WHERE id < 3;
++----+---------+
+| id | surname |
++----+---------+
+|  1 | Иванов  |
+|  2 | Петров  |
++----+---------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT * FROM teacher WHERE surname = "Петров";
++----+---------+
+| id | surname |
++----+---------+
+|  2 | Петров  |
+|  5 | Петров  |
+|  6 | Петров  |
++----+---------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT * FROM teacher WHERE surname = "Петров" LIMIT 2;
++----+---------+
+| id | surname |
++----+---------+
+|  2 | Петров  |
+|  5 | Петров  |
++----+---------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT * FROM teacher WHERE surname = "Петров" LIMIT 1;
++----+---------+
+| id | surname |
++----+---------+
+|  2 | Петров  |
++----+---------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM teacher LIMIT 5;
++----+---------+
+| id | surname |
++----+---------+
+|  1 | Иванов  |
+|  2 | Петров  |
+|  3 | Сидоров |
+|  4 | Чижов   |
+|  5 | Петров  |
++----+---------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT id AS 'ИДЕНТИФИКАТОР', surname AS 'Фамилия' FROM teacher;
++---------------+---------+
+| ИДЕНТИФИКАТОР | Фамилия |
++---------------+---------+
+|             1 | Иванов  |
+|             2 | Петров  |
+|             3 | Сидоров |
+|             4 | Чижов   |
+|             5 | Петров  |
+|             6 | Петров  |
++---------------+---------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT * FROM teacher ORDER BY surname;
++----+---------+
+| id | surname |
++----+---------+
+|  1 | Иванов  |
+|  2 | Петров  |
+|  5 | Петров  |
+|  6 | Петров  |
+|  3 | Сидоров |
+|  4 | Чижов   |
++----+---------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT * FROM teacher ORDER BY id;
++----+---------+
+| id | surname |
++----+---------+
+|  1 | Иванов  |
+|  2 | Петров  |
+|  3 | Сидоров |
+|  4 | Чижов   |
+|  5 | Петров  |
+|  6 | Петров  |
++----+---------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT * FROM teacher ORDER BY id DESC;
++----+---------+
+| id | surname |
++----+---------+
+|  6 | Петров  |
+|  5 | Петров  |
+|  4 | Чижов   |
+|  3 | Сидоров |
+|  2 | Петров  |
+|  1 | Иванов  |
++----+---------+
+6 rows in set (0.00 sec)
+
+mysql> ALTER TABLE teacher ADD age INT;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> show columns from teacher;
++---------+--------------+------+-----+---------+----------------+
+| Field   | Type         | Null | Key | Default | Extra          |
++---------+--------------+------+-----+---------+----------------+
+| id      | int          | NO   | PRI | NULL    | auto_increment |
+| surname | varchar(255) | NO   |     | NULL    |                |
+| age     | int          | YES  |     | NULL    |                |
++---------+--------------+------+-----+---------+----------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from teacher;
++----+---------+------+
+| id | surname | age  |
++----+---------+------+
+|  1 | Иванов  | NULL |
+|  2 | Петров  | NULL |
+|  3 | Сидоров | NULL |
+|  4 | Чижов   | NULL |
+|  5 | Петров  | NULL |
+|  6 | Петров  | NULL |
++----+---------+------+
+6 rows in set (0.00 sec)
+
+mysql> UPDATE teacher SET age = 20 where id=1;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from teacher;
++----+---------+------+
+| id | surname | age  |
++----+---------+------+
+|  1 | Иванов  |   20 |
+|  2 | Петров  | NULL |
+|  3 | Сидоров | NULL |
+|  4 | Чижов   | NULL |
+|  5 | Петров  | NULL |
+|  6 | Петров  | NULL |
++----+---------+------+
+6 rows in set (0.00 sec)
+
+mysql> UPDATE teacher SET age = 25;
+Query OK, 6 rows affected (0.00 sec)
+Rows matched: 6  Changed: 6  Warnings: 0
+
+mysql> select * from teacher;
++----+---------+------+
+| id | surname | age  |
++----+---------+------+
+|  1 | Иванов  |   25 |
+|  2 | Петров  |   25 |
+|  3 | Сидоров |   25 |
+|  4 | Чижов   |   25 |
+|  5 | Петров  |   25 |
+|  6 | Петров  |   25 |
++----+---------+------+
+6 rows in set (0.00 sec)
