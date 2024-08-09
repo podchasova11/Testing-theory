@@ -1262,15 +1262,4 @@ mysql> UPDATE teacher SET age = 25;
 Query OK, 6 rows affected (0.00 sec)
 Rows matched: 6  Changed: 6  Warnings: 0
 
-mysql> select * from teacher;
-+----+---------+------+
-| id | surname | age  |
-+----+---------+------+
-|  1 | Иванов  |   25 |
-|  2 | Петров  |   25 |
-|  3 | Сидоров |   25 |
-|  4 | Чижов   |   25 |
-|  5 | Петров  |   25 |
-|  6 | Петров  |   25 |
-+----+---------+------+
-6 rows in set (0.00 sec)
+
