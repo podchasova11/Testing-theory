@@ -27,6 +27,11 @@ FROM Views
 WHERE author_id = viewer_id
 ORDER BY id;
 
+SELECT name, population, area
+FROM world
+WHERE area >= 300000 
+OR population >= 25000000;
+
 
 SHOW DATABASES;
 CREATE DATABASE sql_course;
