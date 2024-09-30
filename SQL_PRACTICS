@@ -18,6 +18,13 @@ FROM t_account t JOIN t_payments tp ON t.id = tp.account_id
 GROUP BY t.client_id
 HAVING avg(tp.amount) > 2000;
 
+# получить список всех заказов вместе с именами клиентов 
+из таблиц Customer c, Orders o
+
+SELECT O.order_id, C.costumer_name 
+FROM Orders o INNER JOIN Custumers c ON o.costumer_id = c.costumer.id;
+
+
     Напишите решение для поиска всех авторов, которые просмотрели 
     хотя бы одну из своих статей. Верните таблицу результатов, 
     отсортированную по идентификатору в порядке возрастания.
