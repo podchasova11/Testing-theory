@@ -5,6 +5,13 @@ C:\Program Files\MySQL\MySQL Server 8.0>cd bin
 C:\Program Files\MySQL\MySQL Server 8.0\bin>mysql -u root -p
 Enter password: ****
 
+# Чтобы найти все департаменты, в которых нет ни одного сотрудника:
+SELECT d.name
+FROM departamens d
+LEFT JOIN users u ON d.id = u.departament_id
+WHERE u.departament_id IS NULL;
+
+
 SHOW DATABASES;
 CREATE DATABASE sql_course;
 SHOW DATABASES;
