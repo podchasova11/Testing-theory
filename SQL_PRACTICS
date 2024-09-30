@@ -11,6 +11,22 @@ FROM departamens d
 LEFT JOIN users u ON d.id = u.departament_id
 WHERE u.departament_id IS NULL;
 
+# вывести всех клиентов, у которых сумма платежей больше 2000р
+  в выводе должно быть: client_id, и средняя сумма платежа. 
+SELECT t.client_id, tclient_id, avg(tp.amount)
+FROM t_account t JOIN t_payments tp ON t.id = tp.account_id
+GROUP BY t.client_id
+HAVING avg(tp.amount) > 2000;
+
+    Напишите решение для поиска всех авторов, которые просмотрели 
+    хотя бы одну из своих статей. Верните таблицу результатов, 
+    отсортированную по идентификатору в порядке возрастания.
+
+SELECT DISTINCT author_id AS id
+FROM Views
+WHERE author_id = viewer_id
+ORDER BY id;
+
 
 SHOW DATABASES;
 CREATE DATABASE sql_course;
