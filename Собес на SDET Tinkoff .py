@@ -122,3 +122,17 @@ suma = [100, 200, 300]
 total = sum(suma)
 print(total) 
 
+#получить новй список все значентя которого умножены на 2     
+
+suma = [1, 2, 5, 3, 4]
+new_list = [x * 2 for x in suma] # new_list — это просто список, созданный с помощью спискового включения (list comprehension) это компактный способ создания списка
+print(new_list)
+
+       # то же самое циклом:
+suma = [1, 2, 5, 3, 4]
+new_list = []
+
+for x in suma:
+    new_list.append(x * 2)
+
+print(new_list)
