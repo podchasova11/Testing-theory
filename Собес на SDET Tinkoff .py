@@ -136,3 +136,31 @@ for x in suma:
     new_list.append(x * 2)
 
 print(new_list)
+______________________
+
+ #Дан массив натуральных чисел, найти наибольшее по сумме цифр. 
+ # Вывести на экран это число и сумму его цифр [91, 22, 89]
+
+def sum_of_digits(n):
+    return sum(int(digit) for digit in str(n))#Эта функция принимает одно целое число n и возвращает сумму его цифр.
+#Она преобразует число в строку, перебирает каждую цифру, преобразует её обратно в целое число и суммирует все цифры.
+
+def find_number_with_max_digit_sum(arr):#Эта функция принимает массив arr, состоящий из целых чисел.
+    max_sum = 0 #Она инициализирует переменные для хранения максимальной суммы цифр и числа с наибольшей суммой цифр
+    number_with_max_sum = None
+    
+    for num in arr:
+        digit_sum = sum_of_digits(num)#Затем она перебирает каждое число в массиве, вычисляет его сумму цифр sum_of_digits(),
+        if digit_sum > max_sum:# если текущая сумма цифр больше значения max_sum
+            max_sum = digit_sum# #обновляет max_sum 
+            number_with_max_sum = num #и запоминает текущее число как number_with_max_sum
+    
+    return number_with_max_sum, max_sum #В конце функция возвращает число с максимальной суммой цифр и саму максимальную сумму.
+
+# Пример:
+arr = [91, 22, 89]
+number, digit_sum = find_number_with_max_digit_sum(arr)
+
+print(f"Число с наибольшей суммой цифр: {number}")
+print(f"Сумма цифр: {digit_sum}")
+    
