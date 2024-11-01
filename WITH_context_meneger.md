@@ -6,6 +6,7 @@
 
 Вот простой пример работы с контекстным менеджером для открытия файла:
 
+
 ```python
 with open('example.txt', 'r') as file:
     data = file.read()
