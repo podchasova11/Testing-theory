@@ -11,6 +11,26 @@
 
 ---
 Python Comprehension
+List comprehension трудно перевести правильно на русский, потому, раз он генерирует новый список, будем называть его просто генератором списков. Это одна из самых приятных вещей в python, научившись писать которую, будешь применять её везде. Как это выглядит? Пожалуй Вы точно видели записи такого вида:
+
+squares = [x ** 2 for x in range(10)]
+# [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
+это и есть генератор списка, результатом которого будет список квадратов последовательности 0..9. Что здесь происходит? Это обычный цикл for, только записан в удобочитаемом виде, в развёрнутом виде это выглядело бы так:
+
+squares = []
+for x in range(10):
+  squares.append(x ** 2)
+# [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
+Вот тут и видна разница в этих записях — генератор списка условно можно назвать синтаксическим сахаром для цикла for, но у них разное время выполнения. Под капотом генератор списка также использует цикл for но выигрывает по скорости из-за того, то не вызывает метод append у списка (подробности здесь).
+
+Так же как и в обычных циклах в генераторах можно применять условия:
+
+>>> odds = [x for x in range(10) if x % 2 != 0]
+# [1, 3, 5, 7, 9]
+если в условии нужен else, то всё условие пишется до for:
+
+>>> [x ** 2 if x % 2 == 0 else x ** 3 for x in range(10)]
+# [0, 1, 4, 27, 16, 125, 36, 343, 64, 729]
 
 _List Comprehensions_ are a special kind of syntax that let us create lists out of other lists ([Wikipedia](https://en.wikipedia.org/wiki/List_comprehension), [The Python Tutorial](https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions)). They are incredibly useful when dealing with numbers and with one or two levels of nested _for loops_, but beyond that, they can become a little too hard to read.
 
