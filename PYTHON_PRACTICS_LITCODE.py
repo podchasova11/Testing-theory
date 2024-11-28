@@ -32,7 +32,6 @@ print(result)  # Вывод: [0, 1, 9, 16, 100]
 
 ################################### 
 
-
 # VK - Live Coding пример из техсобеса
 
 def max_in_mixed_array(array):
