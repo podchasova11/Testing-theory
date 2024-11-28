@@ -29,3 +29,23 @@ def sortedSquares(nums):
 nums = [-4, -1, 0, 3, 10]  
 result = sortedSquares(nums)  
 print(result)  # Вывод: [0, 1, 9, 16, 100]   
+
+################################### 
+# VK - Live Coding пример из техсобеса
+
+def max_in_mixed_array(array):
+    # return max(array)
+    lst = []
+    for i in array:
+        lst.append(int(i))
+    return max(lst)
+        
+    # print(max(array))
+
+# max_in_mixed_array([1, 2, 3])
+
+assert max_in_mixed_array([1, 2, 3]) == 3
+assert max_in_mixed_array(["5", "7"]) == 7
+# assert max_in_mixed_array([3, "abc", "-2", "0x57"]) == 3
+# assert max_in_mixed_array(["abc", "-2", "0x57"]) == -2
+# assert max_in_mixed_array(["abc", "--2", "0x57"]) == None
