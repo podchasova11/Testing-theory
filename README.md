@@ -1,4 +1,4 @@
-### Testing-theory by Vadim Ksendzov
+### Testing-theory 
 
 Сертификат: Теория QA+ Практика : техники тест дизайна
 
