@@ -720,5 +720,112 @@ __Back-end:__
 - https://scotch.io/bar-talk/why-jwts-suck-as-session-tokens
 - https://t.me/why_jwt_is_bad
 
+```
+import pytest
+import time
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from webdriver_manager.chrome import ChromeDriverManager
 
 
+LINK_INVALID_LOCATOR = (By.XPATH, '//*[@id="authorization_section"]/div/div/div[3]/form/div[1]/div[2]/span')
+
+
+@pytest.fixture(scope="function")
+def browser():
+    """Фикстура для настройки WebDriver."""
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+    yield driver
+    driver.quit()
+
+
+@pytest.fixture(scope="function", params=[
+    "podchasova11@yandex.ru",
+    # " ",
+    # "de",
+    # " povq11@yandex"
+])
+def cur_login(request):
+    """Фикстура для логина."""
+    return request.param
+
+
+@pytest.fixture(scope="function", params=[
+    "Mila4114"
+    # ".ru",
+    # " ",
+    # "de",
+    # " povq11@yandex"
+])
+def cur_password(request):
+    """Фикстура для пароля."""
+    return request.param
+
+
+# @pytest.mark.usefixtures("cur_login", "cur_password")
+class TestLoginPage:
+    """Класс для тестирования страницы входа."""
+    flag_of_bug = False
+
+    @staticmethod
+    def pytest_fail(msg):
+        TestLoginPage.flag_of_bug = True
+        pytest.fail(msg)
+
+    @pytest.mark.parametrize("cur_login", "cur_password")
+    def test_login_redirect_and_input(self, browser, cur_login, cur_password):
+        """Проверка перехода на страницу входа и ввода логина и пароля."""
+        browser.get("https://preprod-ox7ia7ea.stroycode.ru/")
+
+        # Ожидание загрузки страницы входа
+        WebDriverWait(browser, 5).until(EC.presence_of_element_located((By.XPATH, "//*[@id='cookie-notice']/div/button")))
+
+        # Принять куки, если возникает такое окно
+        try:
+            accept_cookies_button = WebDriverWait(browser, 5).until(
+                EC.element_to_be_clickable((By.XPATH, "//*[@id='cookie-notice']/div/button")))
+            accept_cookies_button.click()
+        except Exception as e:
+            print("Кнопка принятия куки не найдена или не доступна:", e)
+
+        # Переход на страницу регистрации
+        next_page_button = WebDriverWait(browser, 10).until(
+            EC.element_to_be_clickable((By.XPATH, "//*[@id='registration']/div/div[2]/div[3]/a")))
+        next_page_button.click()
+
+        # Ввод логина и пароля
+        email_input = WebDriverWait(browser, 10).until(
+            EC.presence_of_element_located((By.XPATH, "//*[@id='authorization_section']/div/div/div[3]/form/div[1]/div/div/div[2]/div/input")))
+        password_input = WebDriverWait(browser, 10).until(
+            EC.presence_of_element_located((By.XPATH, "//*[@id='authorization_section']/div/div/div[3]/form/div[2]/div[1]/div/div/div[2]/div/input")))
+
+        email_input.send_keys(cur_login)  # Ввод логина
+
+        # Проверить логин
+        if len(browser.find_elements(*LINK_INVALID_LOCATOR)) == 0:
+            msg = f"Введен не валидный логин"
+            print(f"Баг  => {msg}")
+            TestLoginPage.pytest_fail(f"Bug # {msg}")
+        print(f"Введен валидный логин\n")
+
+        password_input.send_keys(cur_password)  # Ввод пароля
+
+        # Проверить пароль
+
+        # Клик на кнопку "Авторизоваться"
+        submit_button = browser.find_element(By.XPATH, '//*[@id="authorization_section"]/div/div/div[3]/form/button')
+        submit_button.click()
+
+        time.sleep(5)
+
+        # Проверка, произошел ли вход на страницу авторизации
+        WebDriverWait(browser, 10).until(EC.url_contains("verify-email"))
+        assert "verify-email" in browser.current_url, "Не удалось войти: текущий URL не содержит 'verify-email'"
+
+
+if __name__ == "__main__":
+    pytest.main()
+```
