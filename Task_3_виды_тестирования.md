@@ -12,9 +12,10 @@
 5. **Приемочное тестирование (Acceptance Testing)**
    _______________________________________
 ### Тестирование на основе изменений:
- **Smoke тестирование (Smoke Testing)**
- **Санити тестирование (Sanity Testing)**
- **Регрессионное тестирование (Regression Testing)**
+ 1. **Retest тестирование (Retest Testing)**
+ 2. **Санити тестирование (Sanity Testing)**
+ 3. **Smoke тестирование (Smoke Testing)**
+ 4. **Регрессионное тестирование (Regression Testing)**
 
 ### Что такое нефункциональное тестирование (Non-Functional testing)?
 
