@@ -1381,4 +1381,15 @@ limit 10;
 выхода фильмов из таблицы film.
 Отсортируйте полученный список по названию в алфавитном порядке
 и выведите десять строк начиная с двадцать первой.
+_____________________________________
 
+ИЗ ТЕХСОБЕСА Test_IT
+
+SELECT COUNT(*) FROM employees - посчитать колличество строк(сотрудников и тп) в employees
+
+SELECT COUNT(*) FROM employees WHERE status='active'
+
+SELECT Emp_FirstName, Emp_MidleName, Emp_SecondName FROM Employees
+JOIN Departament ON Dep_ID
+WHERE Dep_ID='бухгалтерия'
+________________________________
