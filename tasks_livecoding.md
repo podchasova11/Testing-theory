@@ -246,7 +246,55 @@ print(find_substring(main_string, "Java"))      # Вывод: -1
 ```
 
 ---
+Вот решения для задач **частоты символов в строке** и **генерации случайного пароля**:
 
+## 13. Частота символов в строке
+
+Функция для подсчета частоты символов в строке. Она возвращает словарь, где ключами являются символы, а значениями — их частота.
+
+```python
+def character_frequency(string):
+    frequency = {}
+    for char in string:
+        frequency[char] = frequency.get(char, 0) + 1
+    return frequency
+```
+
+### Пример использования
+
+```python
+text = "hello world"
+print(character_frequency(text))  
+# Вывод: {'h': 1, 'e': 1, 'l': 3, 'o': 2, ' ': 1, 'w': 1, 'r': 1, 'd': 1}
+```
+
+---
+
+## 14. Генерация случайного пароля
+
+Функция для генерации случайного пароля заданной длины. Пароль будет состоять из больших и маленьких букв, цифр и специальных символов.
+
+```python
+import random
+import string
+
+def generate_random_password(length=12):
+    if length < 6:
+        raise ValueError("Пароль должен содержать хотя бы 6 символов")
+        
+    characters = string.ascii_letters + string.digits + string.punctuation
+    password = ''.join(random.choice(characters) for _ in range(length))
+    return password
+```
+
+### Пример использования
+
+```python
+print(generate_random_password(12))  # Вывод: случайный пароль, например: 'A8$d1fG#2@hL'
+print(generate_random_password(16))  # Вывод: случайный пароль длиной 16 символов
+```
+
+---
 
 ```
 +1. Нахождение факториала числа**
