@@ -225,6 +225,29 @@ print(fibonacci(10))  # Вывод: [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
 ```
 
 ```
+Вот решение задачи по **поиску подстроки в строке** с учетом формата и структуры предыдущих функций. 
+
+## 12. Поиск подстроки в строке
+Функция для поиска подстроки в строке. Она вернет индекс первого вхождения подстроки или -1, если подстрока не найдена.
+
+```python
+def find_substring(string, substring):
+    index = string.find(substring)
+    return index
+```
+
+### Пример использования
+
+```python
+main_string = "Hello, welcome to the world of Python programming."
+substring = "Python"
+print(find_substring(main_string, substring))  # Вывод: 26
+print(find_substring(main_string, "Java"))      # Вывод: -1
+```
+
+---
+
+
 ```
 +1. Нахождение факториала числа**
 +2. Обратная строка
