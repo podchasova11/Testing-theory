@@ -1,5 +1,5 @@
-Что такое SSH
-В этой статье мы расскажем, что такое SSH, для чего он нужен и как работает.
+Что такое SSH https://help.reg.ru/support/hosting/dostupy-i-podklyucheniye-panel-upravleniya-ftp-ssh/chto-takoye-ssh#2
+что такое SSH, для чего он нужен и как работает.
 
 SSH (от англ. secure shell ― безопасная оболочка) ― это защищенный сетевой протокол для удалённого управления сервером через интернет.
 
