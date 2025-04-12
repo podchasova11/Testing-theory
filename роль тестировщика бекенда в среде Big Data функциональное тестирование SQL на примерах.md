@@ -1141,6 +1141,145 @@ SELECT client_id, COUNT(*) AS request_count
 FROM support_tickets 
 GROUP BY client_id 
 HAVING request_count >
+```
+__________________________________________________
 
+## несколько сложных запросов
 
+Конечно! Давайте рассмотрим несколько более сложных SQL-запросов, которые могут быть использованы для анализа данных в контексте платформы агрегатора страховок, такой как МТС. Эти запросы будут включать сложные объединения, подзапросы, аналитические функции и оконные функции.
 
+### Сложные SQL-запросы
+
+#### 1. Политика и клиенты с высокими премиями и их средний возраст
+
+**Задача**: Получить список всех полисов с премией выше 10000, а также из каких возрастных групп клиенты, оформившие эти полисы.
+
+```sql
+SELECT 
+    p.policy_number,
+    c.client_name,
+    c.age,
+    CASE 
+        WHEN c.age < 25 THEN '18-24'
+        WHEN c.age < 35 THEN '25-34'
+        WHEN c.age < 45 THEN '35-44'
+        WHEN c.age < 55 THEN '45-54'
+        ELSE '55+' 
+    END AS age_group
+FROM 
+    insurance_policies p
+JOIN 
+    clients c ON p.client_id = c.id
+WHERE 
+    p.premium > 10000;
+```
+
+**Ожидаемый результат**: Должен вернуть номера полисов, имена клиентов, их возраст и возрастную группу для всех клиентов с полисами премией выше 10000.
+
+---
+
+#### 2. Полисы с самым высоким доходом по типам страховок
+
+**Задача**: Определить типы страховок с максимальным общим доходом (премии) и количеством оформленных полисов.
+
+```sql
+SELECT 
+    p.insurance_type,
+    COUNT(p.policy_number) AS policy_count,
+    SUM(p.premium) AS total_income
+FROM 
+    insurance_policies p
+GROUP BY 
+    p.insurance_type
+ORDER BY 
+    total_income DESC; 
+```
+
+**Ожидаемый результат**: Должен вернуть типы страховок, общее количество полисов и их доход. 
+
+---
+
+#### 3. Клиенты с аннулированными полисами и причина аннулирования
+
+**Задача**: Получить список клиентов, у которых есть аннулированные полисы и узнать причины аннулирования.
+
+```sql
+SELECT 
+    c.client_name,
+    p.policy_number,
+    p.cancellation_reason
+FROM 
+    clients c
+JOIN 
+    insurance_policies p ON c.id = p.client_id
+WHERE 
+    p.status = 'canceled';
+```
+
+**Ожидаемый результат**: Должен вернуть имена клиентов, номера аннулированных полисов и причины аннулирования.
+
+---
+
+#### 4. Анализ временных интервалов между подачей и обработкой заявок
+
+**Задача**: Получить среднее время между подачей заявки и её обработкой для каждой страховки.
+
+```sql
+SELECT 
+    p.insurance_type,
+    AVG(DATEDIFF(a.processing_date, a.application_date)) AS average_processing_time
+FROM 
+    insurance_applications a
+JOIN 
+    insurance_policies p ON a.policy_id = p.id
+WHERE 
+    a.status = 'approved'
+GROUP BY 
+    p.insurance_type;
+```
+
+**Ожидаемый результат**: Должен вернуть усредненное время обработки заявок по типам страховок.
+
+---
+
+#### 5. Отчёт по отказам на основе возраста и полиса
+
+**Задача**: Проанализировать, сколько отказов на заявки на страхование было у клиентов в разных возрастных группах.
+
+```sql
+SELECT 
+    CASE 
+        WHEN c.age < 25 THEN '18-24'
+        WHEN c.age < 35 THEN '25-34'
+        WHEN c.age < 45 THEN '35-44'
+        WHEN c.age < 55 THEN '45-54'
+        ELSE '55+' 
+    END AS age_group,
+    COUNT(a.status) AS rejection_count
+FROM 
+    insurance_applications a
+JOIN 
+    clients c ON a.client_id = c.id
+WHERE 
+    a.status = 'rejected'
+GROUP BY 
+    age_group
+ORDER BY 
+    age_group;
+```
+
+**Ожидаемый результат**: Должен вернуть количество отказов по возрастным группам.
+
+---
+
+#### 6. Анализ доходности клиентов
+
+**Задача**: Узнать общее количество премий, уплаченных клиентами, и общую задолженность по каждому из них.
+
+```sql
+SELECT 
+    c.client_name,
+    SUM(p.premium) AS total_paid,
+    (SELECT SUM(due_amount) FROM payments WHERE client_id = c.id AND payment_status = 'overdue') AS total_due
+FROM
+```
