@@ -1283,3 +1283,69 @@ SELECT
     (SELECT SUM(due_amount) FROM payments WHERE client_id = c.id AND payment_status = 'overdue') AS total_due
 FROM
 ```
+--------------------------------------
+
+SELECT A.id, A.name, B.city
+FROM A
+INNER JOIN B ON A.id = B.id;
+ выполни для таблиц А: id | name
+-----------
+1  | Alice
+2  | Bob
+3  | Charlie
+  В: id | city
+-----------
+1  | New York
+3  | Los Angeles
+4  | Chicago
+Давайте выполним запрос к таблицам A и B с приведёнными данными.
+
+### Исходные таблицы
+
+**Таблица A:**
+```
+id | name
+-----------
+1  | Alice
+2  | Bob
+3  | Charlie
+```
+
+**Таблица B:**
+```
+id | city
+-----------
+1  | New York
+3  | Los Angeles
+4  | Chicago
+```
+
+### SQL Запрос
+
+Запрос:
+```sql
+SELECT A.id, A.name, B.city
+FROM A
+INNER JOIN B ON A.id = B.id;
+```
+
+### Результаты выполнения запроса
+
+Этот запрос выполняет внутреннее соединение (INNER JOIN) таблиц A и B по полю `id`. Это значит, что он вернёт только те строки, где значение `id` совпадает в обеих таблицах.
+
+**Результат запроса:**
+```
+id | name    | city        
+---------------------------
+1  | Alice   | New York    
+3  | Charlie | Los Angeles  
+```
+
+### Объяснение результатов
+
+1. **Alice**: У неё `id = 1`, который присутствует в таблице B (с городом New York).
+2. **Charlie**: У него `id = 3`, который также присутствует в таблице B (с городом Los Angeles).
+
+**Bob** с `id = 2` и запись с `id = 4` в таблице B не совпадают, поэтому они не попадают в результаты.
+
+Таким образом, ответ на ваш запрос — это две строки, соответствующие Alice и Charlie, вместе с их городами.
