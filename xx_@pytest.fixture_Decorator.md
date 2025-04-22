@@ -52,7 +52,7 @@ class TestRoles:
 __________________________
 ______________________________
 Полезные ссылки:
-https://rutube.ru/video/25fe6ca75015a84b844060acc30b8ac0/?r=wd
+https://rutube.ru/video/dc14a896bc2d4cfc072183931856e20a/?r=wd
 
 # Лекция: Декораторы функций в Python
 
