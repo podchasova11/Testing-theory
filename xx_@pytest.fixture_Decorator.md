@@ -54,6 +54,8 @@ ______________________________
 Полезные ссылки:
 https://rutube.ru/video/dc14a896bc2d4cfc072183931856e20a/?r=wd
 https://rutube.ru/video/d1a60ed2510baf1f11fd05898468d588/?r=wd
+https://rutube.ru/video/c18f95a47ee9be71a050642aded2c2c8/?r=wd
+
 
 # Лекция: Декораторы функций в Python
 
