@@ -434,4 +434,140 @@ def test_something():
 - **`@pytest.mark.usefixtures`**: Позволяет явно использовать фикстуры в тестах без передачи их как аргументов.
 
 Вы также узнали, как создавать собственные декораторы для повторного выполнения тестов или любой другой функциональности в вашей программной среде.
+_________________________________
+https://rutube.ru/video/dc14a896bc2d4cfc072183931856e20a/?r=wd
+
+# Декораторы функций
+def func_decorator(func):
+    def wrapper():
+        print("------ что-то делаем перед вызовом функции ------")
+        func()
+        print("------ что-то делаем после вызова функции ------")
+    return wrapper()
+#
+#
+# def some_func():
+#     print("Вызов функции some_func")
+#
+#
+#
+# some_func()
+
+# f = func_decorator(some_func)
+# f
+
+#
+# some_func = func_decorator(some_func)
+# some_func
+
+##########################
+# def func_decorator(func):
+#     def wrapper(title):
+#         print("------ что-то делаем перед вызовом функции ------")
+#         func(title)
+#         print("------ что-то делаем после вызова функции ------")
+#     return wrapper
+# def some_func(title):
+#     print(f"title = {title}")
+#
+# some_func = func_decorator(some_func)
+# some_func("Python навсегда!")
+
+
+################################
+def func_decorator(func):
+    def wrapper(*args, **kwargs):
+        print("------ что-то делаем перед вызовом функции ------")
+        func(*args, **kwargs)
+        print("------ что-то делаем после вызова функции ------")
+    return wrapper
+
+
+def some_func(title, tag):
+    print(f"title = {title}, tag = {tag}")
+    return f"<{tag}>{title}</{tag}>"
+
+some_func = func_decorator(some_func)
+some_func("Python навсегда!", "h1")
+
+################################
+
+# def func_decorator(func):
+#     def wrapper(*args, **kwargs):
+#         print("------ что-то делаем перед вызовом функции ------")
+#         func(*args, **kwargs)
+#         print("------ что-то делаем после вызова функции ------")
+#         # return res
+#
+#     return wrapper
+#
+#
+# def some_func(title, tag):
+#     print(f"title = {title}, tag = {tag}")
+#     return f"<{tag}>{title}</{tag}>"
+#
+#
+# some_func = func_decorator(some_func)
+# res = some_func("Python навсегда!", "h1")
+# print(res)
+
+################################
+
+# def func_decorator(func):
+#     def wrapper(*args, **kwargs):
+#         print("------ что-то делаем перед вызовом функции ------")
+#         res = func(*args, **kwargs)
+#         print("------ что-то делаем после вызова функции ------")
+#         return res
+#
+#     return wrapper
+#
+#
+# def some_func(title, tag):
+#     print(f"title = {title}, tag = {tag}")
+#     return f"<{tag}>{title}</{tag}>"
+#
+#
+# some_func = func_decorator(some_func)
+# res = some_func("Python навсегда!", "h1")
+# print(res)
+# #################################
+# import time
+#
+# def test_time(func):
+#     def wrapper(*args, **kwargs):
+#         st = time.time()
+#         res = func(*args, **kwargs)
+#         et = time.time()
+#         dt = et - st
+#         print(f"Время работы: {dt} сек")
+#         return res
+#
+#     return wrapper
+#
+#
+# def get_nod(a, b):
+#     while a != b:
+#         if a > b:
+#             a -= b
+#         else:
+#             b -= a
+#     return a
+#
+#
+# def get_fast_nod(a, b):
+#     if a < b:
+#         a, b = b, a
+#     while b:
+#         a, b = b, a % b
+#
+#     return a
+#
+#
+# get_nod = test_time(get_nod)
+# get_fast_nod = test_time(get_fast_nod)
+#
+# res = get_nod(2, 1000000)
+# res2 = get_fast_nod(2, 1000000)
+# print(res, res2)
 
