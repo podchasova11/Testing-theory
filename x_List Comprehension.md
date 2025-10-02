@@ -22,7 +22,7 @@ for x in range(10):
 >>> [x ** 2 if x % 2 == 0 else x ** 3 for x in range(10)]
 ### [0, 1, 4, 27, 16, 125, 36, 343, 64, 729]
 
-_List Comprehensions_ are a special kind of syntax that let us create lists out of other lists ([Wikipedia](https://en.wikipedia.org/wiki/List_comprehension), [The Python Tutorial](https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions)). They are incredibly useful when dealing with numbers and with one or two levels of nested _for loops_, but beyond that, they can become a little too hard to read.
+_List Comprehensions_ are a special kind of syntax that let us create lists out of other lists, [The Python Tutorial](https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions)). They are incredibly useful when dealing with numbers and with one or two levels of nested _for loops_, but beyond that, they can become a little too hard to read.
 
 In this article, we are going to make some _For Loops_ and rewrite them, step by step, into _Comprehensions_.
 
