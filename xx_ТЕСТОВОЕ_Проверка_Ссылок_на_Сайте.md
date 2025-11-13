@@ -19,7 +19,7 @@ beautifulsoup4
 pytest
 ```
 
-Установи их: `pip install -r requirements.txt`
+Установить: `pip install -r requirements.txt`
 
 **3. utils.py:**
 
