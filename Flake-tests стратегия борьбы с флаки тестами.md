@@ -16,11 +16,11 @@
 # pytest-flakefinder для выявления флаки-тестов
 # Установка: pip install pytest-flakefinder
 ~~~
-## Запуск теста 100 раз для обнаружения нестабильности
+### Запуск теста 100 раз для обнаружения нестабильности
 ```
 pytest test_example.py --flake-finder --flake-runs=100
 ```
-## Отметить флаки-тест и отслеживать
+### Отметить флаки-тест и отслеживать
 ```
 import pytest
 
@@ -34,8 +34,9 @@ def test_unstable_api():
 def test_third_party_service():
 ```
 
-### 2. Стабилизация зависимостей
-# Использование моков и стабов для внешних сервисов
+## 2. Стабилизация зависимостей
+### Использование моков и стабов для внешних сервисов
+~~~
 from unittest.mock import Mock, patch
 import requests
 
@@ -49,8 +50,9 @@ def test_with_mocked_api():
         
         result = get_api_data()
         assert result["status"] == "ok"
-
-# Использование фикстур для очистки состояния
+~~~
+### Использование фикстур для очистки состояния
+~~~
 import pytest
 
 @pytest.fixture
@@ -66,15 +68,16 @@ def test_with_clean_db(clean_database):
     # Тест с гарантированно чистым состоянием
     db.insert_test_data()
     assert db.count_records() == 1
-
+~~~
 ### 3. Улучшение стратегий ожидания
-# ЗАПРЕЩЕНО: Хрупкие sleep()
+## ЗАПРЕЩЕНО: Хрупкие sleep()
+~~~
 import time
 def test_bad_example():
     click_button()
     time.sleep(5)  # ❌ Жесткая задержка
     assert element_is_visible()
-
+~~~
 # Лучше: Явные ожидания (explicit waits)
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
