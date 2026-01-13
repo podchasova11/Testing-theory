@@ -1,4 +1,4 @@
-## Элементы интерфейса Web / Mobile
+### Элементы интерфейса Web / Mobile
 
 ### Что такое кнопка / Radiobutton / Checkbox?
 
