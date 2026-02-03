@@ -1,4 +1,4 @@
-## Part 1 DDL
+### Part 1 DDL
 ### 1. Create table "employees" with following DDL:
  ```
  id, serial,  primary key,
