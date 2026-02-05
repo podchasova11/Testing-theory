@@ -1,3 +1,50 @@
+###Как в GET запросе отправить через квери параметр два параметра. Синтаксически как это сделать? 
+
+Чтобы отправить в GET-запросе два параметра через строку запроса (квери-параметры), синтаксис такой:
+
+- формат: `?параметр1=значение1&параметр2=значение2`
+- если значение содержит спецсимволы или пробелы, их нужно кодировать (URL-кодирование). Обычно браузеры и клиенты делают это автоматически.
+
+Примеры:
+
+- Простые параметры:
+  - `https://example.com/search?q=python&limit=10`
+
+- Значения с пробелами и специальными символами:
+  - `https://example.com/search?q=machine%20learning&sort=relevance`
+  Здесь пробелы закодированы как `%20`.
+
+- Параметр без значения (у некоторых API это допускается):
+  - `https://example.com/api?verbose&count=5`
+  В этом случае первый параметр `verbose` считается как `verbose=`, или как булево, в зависимости от сервера.
+
+Если вы строите запрос программно, лучше использовать средства кодирования URL:
+
+- JavaScript (URLSearchParams):
+  - ```js
+    const params = new URLSearchParams({ q: 'python', limit: '10' });
+    fetch(`https://example.com/search?${params.toString()}`);
+    // Результат: https://example.com/search?q=python&limit=10
+    ```
+
+- Python (urllib.parse):
+  - ```python
+    from urllib.parse import urlencode
+    base = "https://example.com/search"
+    query = urlencode({'q': 'machine learning', 'limit': 10})
+    url = f"{base}?{query}"
+    # https://example.com/search?q=machine+learning&limit=10
+    ```
+
+- Java (URLEncoder):
+  - ```java
+    String base = "https://example.com/search";
+    String query = String.format("q=%s&limit=%d",
+      URLEncoder.encode("machine learning", StandardCharsets.UTF_8),
+      10);
+    String url = base + "?" + query;
+    ```
+
 ###Для чего нужны заголовки в HTTP-запросах?
 ___________________
  Заголовки содержат метаинформацию о запросе: тип контента, кодировку,
