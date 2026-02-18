@@ -1,8 +1,13 @@
---create 'employee' table
+-- --create 'employee' table
 CREATE TABLE employees (
 id SERIAL  PRIMARY KEY,
 employee_name VARCHAR(50) NOT NULL
 );
+
+-- CREATE TABLE emploees (
+-- id SERIAL PRIMARY KEY,
+-- employee_name VARCHAR(50) NOT NULL
+-- );
 
 -- insert 70 records
 INSERT INTO employees (employee_name)
