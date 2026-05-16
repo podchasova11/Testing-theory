@@ -1,3 +1,4 @@
+
 ### Part 1 DDL
 ### 1. Create table "employees" with following DDL:
  ```
